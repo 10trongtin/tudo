@@ -99,8 +99,16 @@ function validateField(field) {
         body: JSON.stringify(payload),
         signal: controller.signal
       });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok || !result.ok) throw new Error(result.message || 'Không thể gửi đăng ký lúc này.');
+      let result = {};
+      const rawText = await response.text().catch(() => '');
+      if (rawText) {
+        try { result = JSON.parse(rawText); } catch { result = {}; }
+      }
+
+      if (!response.ok || !result.ok) {
+        const detail = result.message || rawText || `Không thể gửi đăng ký lúc này. (Mã lỗi ${response.status})`;
+        throw new Error(detail);
+      }
 
       form.reset();
       form.querySelector('[name="startedAt"]').value = String(Date.now());
