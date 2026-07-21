@@ -1,0 +1,16 @@
+.git/
+.gitignore
+.env
+.env.*
+.assetsignore
+.server.pid
+.chrome-*/
+.wrangler/
+api/
+functions/
+worker.js
+wrangler.jsonc
+wrangler.toml
+RESEND_SETUP.md
+IMAGE_CREDITS.md
+*.md

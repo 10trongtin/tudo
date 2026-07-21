@@ -1,0 +1,10 @@
+name = 'tudo'
+account_id = 'fdddf60daf88a670669805205e30ccf4'
+main = './worker.js'
+compatibility_date = '2026-07-21'
+keep_vars = true
+
+[assets]
+directory = '.'
+binding = 'ASSETS'
+run_worker_first = [ '/api/*' ]

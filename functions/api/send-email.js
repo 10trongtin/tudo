@@ -51,7 +51,7 @@ function jsonResponse(status, body) {
   });
 }
 
-async function handleRequest(request, env) {
+export async function handleRequest(request, env) {
   const runtimeEnv = typeof globalThis.process !== 'undefined' && globalThis.process?.env ? globalThis.process.env : {};
 
   try {
