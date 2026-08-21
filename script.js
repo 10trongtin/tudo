@@ -460,8 +460,6 @@ function setupSignatureProgress() {
 function setupFeedbackSlider() {
   const track = document.getElementById('feedback-track');
   const dotsContainer = document.getElementById('feedback-dots');
-  const prevBtns = document.querySelectorAll('.slider-btn-prev');
-  const nextBtns = document.querySelectorAll('.slider-btn-next');
 
   if (!track) return;
 
@@ -489,25 +487,7 @@ function setupFeedbackSlider() {
     });
   }
 
-  const getScrollAmount = () => {
-    const card = cards[0];
-    const gap = Number.parseFloat(window.getComputedStyle(track).gap) || 20;
-    return card ? card.offsetWidth + gap : 360;
-  };
-
-  prevBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-    });
-  });
-
-  nextBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-    });
-  });
-
-  // Update dots on scroll
+  // Update active dot on scroll
   const updateDots = () => {
     const scrollLeft = track.scrollLeft;
     const dots = dotsContainer ? dotsContainer.querySelectorAll('.slider-dot') : [];
