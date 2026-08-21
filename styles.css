@@ -234,7 +234,7 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 .footer-form-card .lead-form .button, .footer-form-card .privacy { grid-column: auto; }
 
 .site-footer { padding: 55px 0 28px; color: rgba(255,255,255,.68); background: #0d1737; }
-.footer-grid { display: grid; grid-template-columns: .7fr .75fr 1.15fr 1.8fr; gap: 35px; align-items: start; }
+.footer-grid { display: grid; grid-template-columns: .7fr .6fr .9fr .7fr 1.4fr; gap: 28px; align-items: start; }
 .brand-light { width: 104px; margin-bottom: 18px; padding: 9px; border-radius: 16px; background: white; }
 .brand-light .brand-logo { width: 86px; height: auto; }
 .footer-grid > div:not(:first-child) { display: flex; flex-direction: column; gap: 7px; }
@@ -283,7 +283,7 @@ h3 { font-size: 1.2rem; font-weight: 700; }
   .usp-aside { position: static; max-width: 760px; }
   .decor-character { display: none; }
   .course-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-grid { grid-template-columns: .7fr .8fr 1.15fr 1.6fr; }
+  .footer-grid { grid-template-columns: .7fr .6fr .9fr .7fr 1.4fr; }
 }
 
 @media (max-width: 760px) {
@@ -2384,5 +2384,153 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 
   .gallery-item:not(.gallery-main):not(.gallery-wide) .gallery-caption strong {
     max-width: 135px;
+  }
+}
+
+
+/* =====================================================================
+   FEEDBACK FIX — 2026-08-21
+   1. Màu s?c: Lighten pain-section -> cân b?ng 60% tr?ng / 30% navy / 10% vàng
+   2. Size ch?: Tang font-size sub-content & CTA button
+   3. Social links footer
+   ===================================================================== */
+
+/* --- Fix 1: Pain section chuyen sang nen sang --- */
+.pain-section {
+  color: var(--ink);
+  background: linear-gradient(135deg, #f8faff 0 62%, #eef2fb 100%);
+}
+
+.pain-section .section-heading h2 {
+  color: var(--navy-800);
+}
+
+.pain-section::before {
+  color: rgba(32, 56, 120, .12) !important;
+}
+
+.pain-card {
+  border-top-color: rgba(32, 56, 120, .14);
+  background: transparent;
+}
+
+.pain-card:hover {
+  border-color: var(--orange);
+  background: rgba(248, 168, 16, .06);
+  transform: translateX(6px);
+}
+
+.pain-icon {
+  color: var(--orange);
+  background: transparent;
+}
+
+.pain-card p {
+  color: var(--body);
+}
+
+.bridge-line {
+  color: var(--navy-800);
+  border-top-color: rgba(32, 56, 120, .14);
+}
+
+.bridge-line::after {
+  background: var(--orange);
+}
+
+/* --- Fix 2: Tang font-size noi dung sub & CTA --- */
+body {
+  font-size: 16.5px;
+}
+
+.course-detail p {
+  font-size: .83rem;
+  line-height: 1.72;
+}
+
+.course-detail strong {
+  font-size: .79rem;
+}
+
+.course-card em {
+  font-size: .83rem;
+  line-height: 1.6;
+}
+
+.info-card p {
+  font-size: .91rem;
+  line-height: 1.8;
+}
+
+.pain-card p {
+  font-size: .96rem;
+}
+
+.usp-card p {
+  font-size: .87rem;
+}
+
+.benefit-list {
+  font-size: .96rem;
+}
+
+.button-full {
+  font-size: 1.02rem;
+  min-height: 58px;
+  letter-spacing: .025em;
+}
+
+.button-sm {
+  font-size: .82rem;
+}
+
+.countdown strong {
+  font-size: 1.85rem;
+}
+
+.countdown span {
+  font-size: .65rem;
+}
+
+.footer-grid > div:not(:first-child) a,
+.footer-grid > div:not(:first-child) address {
+  font-size: .84rem;
+}
+
+/* --- Fix 3: Social links footer --- */
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.82) !important;
+  font-size: .72rem;
+  font-weight: 600;
+  transition: background .2s, border-color .2s, color .2s;
+}
+
+.footer-social a:hover {
+  border-color: var(--orange);
+  color: var(--orange) !important;
+  background: rgba(248, 168, 16, .08);
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 15.5px;
+  }
+
+  .course-detail p,
+  .pain-card p {
+    font-size: .88rem;
   }
 }
