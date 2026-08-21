@@ -71,6 +71,8 @@ function validateField(field) {
     message = 'Vui lòng nhập họ và tên hợp lệ.';
   } else if (field.name === 'phone' && !/^(03|05|07|08|09)\d{8}$/.test(value)) {
     message = 'Số điện thoại gồm 10 số, bắt đầu bằng 03/05/07/08/09.';
+  } else if (field.name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    message = 'Vui lòng nhập email hợp lệ (ví dụ: name@gmail.com).';
   }
 
   wrapper.classList.toggle('invalid', Boolean(message));

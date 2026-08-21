@@ -99,7 +99,7 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 .benefit-list li { display: flex; align-items: center; gap: 9px; }
 .benefit-list li span { color: var(--accent-light); font-weight: 800; }
 .lead-card > .form-mount { padding: 38px 40px 28px; }
-.lead-form { display: grid; grid-template-columns: 1fr 1fr 1.12fr; gap: 16px; align-items: start; }
+.lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; align-items: start; }
 .field { position: relative; }
 .field label { display: block; margin-bottom: 7px; color: #423b3d; font-size: .78rem; font-weight: 700; }
 .field label span { color: var(--primary); }
@@ -2389,8 +2389,8 @@ h3 { font-size: 1.2rem; font-weight: 700; }
 
 
 /* =====================================================================
-   FEEDBACK FIX — 2026-08-21
-   1. Màu s?c: Lighten pain-section -> cân b?ng 60% tr?ng / 30% navy / 10% vàng
+   FEEDBACK FIX ï¿½ 2026-08-21
+   1. Mï¿½u s?c: Lighten pain-section -> cï¿½n b?ng 60% tr?ng / 30% navy / 10% vï¿½ng
    2. Size ch?: Tang font-size sub-content & CTA button
    3. Social links footer
    ===================================================================== */
