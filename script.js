@@ -1,3 +1,10 @@
+// =========================================================================
+// CẤU HÌNH GỬI FORM VỀ GOOGLE SHEET & GMAIL (CLOUDFLARE PAGES / STATIC WEB)
+// =========================================================================
+// Hướng dẫn: Dán đường link Web App URL lấy từ Google Apps Script vào đây.
+// Ví dụ: const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycb.../exec';
+const GOOGLE_SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxa_OAsB0z4dElJ02JjK65JkfEcURDR9eLwPo5YPAC_PCqbrnqvWWAa5IQGc27RwnlQ/exec';
+
 const SHOW_STATS_SECTION = false;
 
 // Đổi số ngày tại đây nếu muốn thay chu kỳ ưu đãi.
@@ -94,30 +101,46 @@ function validateField(field) {
     const timeoutId = window.setTimeout(() => controller.abort(), 12000);
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      });
-      let result = {};
-      const rawText = await response.text().catch(() => '');
-      if (rawText) {
-        try { result = JSON.parse(rawText); } catch { result = {}; }
-      }
+      if (GOOGLE_SHEET_WEBAPP_URL && GOOGLE_SHEET_WEBAPP_URL.startsWith('http')) {
+        // Gửi trực tiếp về Google Apps Script (Hoạt động 100% trên Cloudflare Pages)
+        await fetch(GOOGLE_SHEET_WEBAPP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+      } else {
+        // Gửi qua Serverless function nếu chạy trên môi trường có backend Node
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        let result = {};
+        const rawText = await response.text().catch(() => '');
+        if (rawText) {
+          try { result = JSON.parse(rawText); } catch { result = {}; }
+        }
 
-      if (!response.ok || !result.ok) {
-        const detail = result.message || rawText || `Không thể gửi đăng ký lúc này. (Mã lỗi ${response.status})`;
-        throw new Error(detail);
+        if (!response.ok || !result.ok) {
+          const detail = result.message || rawText || `Chưa cấu hình nhận email. Vui lòng liên hệ hotline. (Mã lỗi ${response.status})`;
+          throw new Error(detail);
+        }
       }
 
       form.reset();
       form.querySelector('[name="startedAt"]').value = String(Date.now());
       form.querySelectorAll('.field').forEach((field) => field.classList.remove('invalid'));
-      showToast();
+      showToast({
+        type: 'success',
+        title: 'Đăng ký thành công!',
+        message: 'TUDO EDU đã nhận được thông tin và sẽ liên hệ tư vấn lộ trình chi tiết cho bạn sớm nhất.'
+      });
     } catch (error) {
       const message = error.name === 'AbortError'
-        ? 'Kết nối quá thời gian. Vui lòng thử lại.'
+        ? 'Kết nối quá thời gian. Vui lòng kiểm tra lại mạng hoặc gọi trực tiếp hotline.'
         : error.message;
       showToast({ type: 'error', title: 'Chưa gửi được đăng ký', message });
     } finally {
