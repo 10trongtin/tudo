@@ -335,7 +335,7 @@ function hideToast() {
 
 function setupHorizontalLists() {
   const mobileLayout = window.matchMedia('(max-width: 760px)');
-  const lists = document.querySelectorAll('.course-grid, .feedback-grid');
+  const lists = document.querySelectorAll('.course-grid, .feedback-grid, .feedback-grid-v2');
 
   const sync = () => {
     lists.forEach((list) => {
