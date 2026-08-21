@@ -365,7 +365,7 @@ function setupHorizontalLists() {
 }
 
 function setupStickyCtaVisibility() {
-  const stickyCta = document.querySelector('.mobile-sticky-cta');
+  const stickyCta = document.querySelector('.mobile-sticky-bar, .mobile-sticky-cta');
   const targets = document.querySelectorAll('#dang-ky, #uu-dai, #lien-he');
   if (!stickyCta || !targets.length || !('IntersectionObserver' in window)) return;
 

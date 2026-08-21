@@ -2802,3 +2802,424 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* =====================================================================
+   MODERN FOOTER & COMPACT MOBILE CALL ACTION — 2026-08-21
+   ===================================================================== */
+
+/* Footer Container & Background */
+.site-footer {
+  padding: 80px 0 0;
+  color: rgba(255, 255, 255, .78);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(32, 56, 120, .3), transparent 45%),
+    radial-gradient(circle at 90% 90%, rgba(248, 168, 16, .08), transparent 40%),
+    #0a132c;
+  border-top: 1px solid rgba(248, 168, 16, .22);
+}
+
+.footer-main-layout {
+  display: grid;
+  grid-template-columns: 1.35fr .85fr 1.1fr;
+  gap: 55px;
+  align-items: start;
+  padding-bottom: 60px;
+}
+
+/* Brand Column */
+.footer-col-brand .brand-logo {
+  height: 62px;
+  width: auto;
+  margin-bottom: 18px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.25));
+}
+
+.footer-slogan {
+  font-size: .88rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .72);
+  margin-bottom: 24px;
+  max-width: 380px;
+}
+
+/* Social Media Cards in Footer */
+.footer-social-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-header-label {
+  font-size: .74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--orange);
+}
+
+.footer-social-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .12);
+  transition: all .25s cubic-bezier(.2,.75,.25,1);
+  text-decoration: none;
+}
+
+.social-card-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fb-card .fb-icon {
+  background: #1877f2;
+  color: white;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, .35);
+}
+
+.tiktok-card .tiktok-icon {
+  background: #000000;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, .2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .4);
+}
+
+.social-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-card-info strong {
+  font-size: .84rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1.2;
+}
+
+.social-card-info small {
+  font-size: .72rem;
+  color: rgba(255, 255, 255, .6);
+}
+
+.social-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, .1);
+}
+
+.fb-card:hover {
+  border-color: #1877f2;
+  box-shadow: 0 6px 20px rgba(24, 119, 242, .25);
+}
+
+.tiktok-card:hover {
+  border-color: rgba(255, 255, 255, .45);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, .1);
+}
+
+/* Headings in Columns */
+.footer-col-title {
+  font-size: .92rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-col-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+/* Quick links column */
+.footer-links-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links-menu a {
+  color: rgba(255, 255, 255, .72);
+  font-size: .86rem;
+  transition: all .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-links-menu a::before {
+  content: "›";
+  color: var(--orange);
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.footer-links-menu a:hover {
+  color: var(--orange);
+  transform: translateX(4px);
+}
+
+/* Contact Column */
+.footer-contact-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footer-contact-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.contact-icon-pill {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(248, 168, 16, .12);
+  border: 1px solid rgba(248, 168, 16, .25);
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contact-subhead {
+  font-size: .72rem;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-weight: 600;
+}
+
+.contact-primary-link {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--orange) !important;
+  letter-spacing: .02em;
+  transition: opacity .2s;
+}
+
+.contact-primary-link:hover {
+  opacity: .85;
+  text-decoration: underline;
+}
+
+.contact-secondary-link {
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .88) !important;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  transition: color .2s;
+}
+
+.contact-secondary-link:hover {
+  color: var(--orange) !important;
+}
+
+.contact-address-text {
+  font-size: .85rem;
+  font-style: normal;
+  color: rgba(255, 255, 255, .82);
+  line-height: 1.6;
+}
+
+/* Footer Bottom Subbar */
+.footer-subbar {
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding: 22px 0;
+  background: rgba(0, 0, 0, .2);
+}
+
+.footer-subbar-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .8rem;
+  color: rgba(255, 255, 255, .5);
+}
+
+.footer-totop {
+  color: rgba(255, 255, 255, .7);
+  transition: color .2s;
+}
+
+.footer-totop:hover {
+  color: var(--orange);
+}
+
+/* =====================================================================
+   COMPACT MOBILE STICKY CALL & REGISTER BAR
+   ===================================================================== */
+.mobile-sticky-bar {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-footer {
+    padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer-main-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .mobile-sticky-bar {
+    position: fixed;
+    z-index: 100;
+    left: 12px;
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    padding: 6px;
+    border-radius: 18px;
+    background: rgba(10, 19, 44, .92);
+    border: 1px solid rgba(255, 255, 255, .18);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+
+  .mobile-sticky-bar.is-suppressed {
+    opacity: 0;
+    transform: translateY(calc(100% + 25px));
+    pointer-events: none;
+  }
+
+  /* Compact Hotline Call Action */
+  .mobile-call-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    background: #25d366;
+    color: #0b2b13 !important;
+    font-size: .84rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
+    transition: transform .15s ease, filter .15s ease;
+    flex-shrink: 0;
+  }
+
+  .mobile-call-action:active {
+    transform: scale(.96);
+  }
+
+  .call-icon-wrap {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    animation: phone-pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes phone-pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    15% { transform: scale(1.18) rotate(-12deg); }
+    30% { transform: scale(1.18) rotate(12deg); }
+    45% { transform: scale(1.18) rotate(-8deg); }
+    60% { transform: scale(1) rotate(0deg); }
+  }
+
+  .call-text {
+    white-space: nowrap;
+  }
+
+  /* Register Action */
+  .mobile-register-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--orange) 0%, #ffbe3b 100%);
+    color: var(--navy-950) !important;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(248, 168, 16, .35);
+    transition: transform .15s ease;
+    overflow: hidden;
+  }
+
+  .mobile-register-action:active {
+    transform: scale(.97);
+  }
+
+  .register-main-text {
+    font-size: .84rem;
+    font-weight: 800;
+    letter-spacing: .01em;
+    white-space: nowrap;
+  }
+
+  .register-sub-badge {
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(16, 28, 66, .12);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 390px) {
+  .mobile-call-action {
+    padding: 0 12px;
+  }
+  .call-text {
+    display: none;
+  }
+  .mobile-register-action {
+    padding: 0 12px;
+  }
+  .register-main-text {
+    font-size: .8rem;
+  }
+  .register-sub-badge {
+    font-size: .62rem;
+    padding: 2px 6px;
+  }
+}
