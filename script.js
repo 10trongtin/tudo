@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHorizontalLists();
   setupStickyCtaVisibility();
   setupSignatureProgress();
+  setupFeedbackSlider();
   document.getElementById('current-year').textContent = new Date().getFullYear();
 });
 
@@ -171,9 +172,59 @@ function setupHeader() {
     else openMenu();
   });
 
-  nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => closeMenu(false));
+  // Smooth scroll with header offset for internal anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      if (targetId === '#top') {
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        closeMenu(false);
+        return;
+      }
+
+      const target = document.querySelector(targetId);
+      if (target) {
+        event.preventDefault();
+        const headerOffset = header ? header.offsetHeight : 70;
+        const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 12;
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+        closeMenu(false);
+      }
+    });
   });
+
+  // ScrollSpy: highlight active menu item on scroll
+  const navLinks = nav.querySelectorAll('a[href^="#"]');
+  const sections = [...navLinks]
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  const updateActiveNav = () => {
+    const headerOffset = (header ? header.offsetHeight : 70) + 60;
+    const scrollPos = window.scrollY + headerOffset;
+
+    let currentSectionId = '';
+    sections.forEach((section) => {
+      if (scrollPos >= section.offsetTop) {
+        currentSectionId = `#${section.id}`;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      link.classList.toggle('active', href === currentSectionId);
+    });
+  };
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
 
   document.addEventListener('keydown', (event) => {
     if (!isOpen()) return;
@@ -404,4 +455,82 @@ function setupSignatureProgress() {
   update();
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
+}
+
+function setupFeedbackSlider() {
+  const track = document.getElementById('feedback-track');
+  const dotsContainer = document.getElementById('feedback-dots');
+  const prevBtns = document.querySelectorAll('.slider-btn-prev');
+  const nextBtns = document.querySelectorAll('.slider-btn-next');
+
+  if (!track) return;
+
+  const cards = [...track.querySelectorAll('.feedback-card')];
+  if (!cards.length) return;
+
+  // Build pagination dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    cards.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Xem cảm nhận ${idx + 1}`);
+      dot.addEventListener('click', () => {
+        const card = cards[idx];
+        if (card) {
+          track.scrollTo({
+            left: card.offsetLeft - track.offsetLeft,
+            behavior: 'smooth'
+          });
+        }
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  const getScrollAmount = () => {
+    const card = cards[0];
+    const gap = Number.parseFloat(window.getComputedStyle(track).gap) || 20;
+    return card ? card.offsetWidth + gap : 360;
+  };
+
+  prevBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+
+  nextBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+  });
+
+  // Update dots on scroll
+  const updateDots = () => {
+    const scrollLeft = track.scrollLeft;
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('.slider-dot') : [];
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    cards.forEach((card, idx) => {
+      const distance = Math.abs(card.offsetLeft - track.offsetLeft - scrollLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = idx;
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === closestIndex);
+    });
+  };
+
+  let scrollTimeout;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(updateDots, 60);
+  }, { passive: true });
 }
